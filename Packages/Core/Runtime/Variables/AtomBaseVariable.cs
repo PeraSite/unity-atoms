@@ -24,6 +24,8 @@ namespace UnityAtoms
         /// Abstract method that could be implemented to reset the Variable value.
         /// </summary>
         public abstract void Reset(bool shouldTriggerEvents = false);
+
+        public abstract void NotifyChanged();
     }
 
     /// <summary>
@@ -58,6 +60,9 @@ namespace UnityAtoms
         [SerializeField]
         protected T _value = default(T);
 
+        [SerializeField]
+        protected bool IsSaved = false;
+
         /// <summary>
         /// Determines equality between Variables.
         /// </summary>
@@ -72,6 +77,11 @@ namespace UnityAtoms
         /// Not implemented.abstract Throws Exception
         /// </summary>
         public override void Reset(bool shouldTriggerEvents = false)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void NotifyChanged()
         {
             throw new NotImplementedException();
         }

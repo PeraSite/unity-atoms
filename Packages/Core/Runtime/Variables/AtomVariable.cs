@@ -232,7 +232,7 @@ namespace UnityAtoms
             }
             else
             {
-                SetValue(InitialValue);
+                SetValue(InitialValue, true);
             }
         }
 
@@ -255,7 +255,11 @@ namespace UnityAtoms
 
             if (triggerEvents)
             {
-                if (Changed != null) { Changed.Raise(_value); }
+                if (Changed != null)
+                {
+                    // Debug.Log($"{name} variable change event instance id: {Changed.GetInstanceID()}");
+                    Changed.Raise(_value);
+                }
                 if (ChangedWithHistory != null)
                 {
                     // NOTE: Doing new P() here, even though it is cleaner, generates garbage.
@@ -267,6 +271,11 @@ namespace UnityAtoms
             }
 
             return changeValue;
+        }
+
+        public override void NotifyChanged()
+        {
+            SetValue(Value, true);
         }
 
         /// <summary>

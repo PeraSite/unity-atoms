@@ -61,6 +61,7 @@ namespace UnityAtoms
         /// <param name="item">The value associated with the Event.</param>
         public void Raise(T item)
         {
+            // Debug.Log($"{name} Raised! value:" + item);
 #if !UNITY_ATOMS_GENERATE_DOCS && UNITY_EDITOR
             StackTraces.AddStackTrace(GetInstanceID(), StackTraceEntry.Create(item));
 #endif

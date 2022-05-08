@@ -63,15 +63,15 @@ namespace UnityAtoms
         private AtomConditionOperators _operator = AtomConditionOperators.And;
 
         [SerializeField]
-        private bool _replayEventBufferOnRegister = true;
+        private bool _replayEventBufferOnRegister = false;
 
-        private void OnEnable()
+        private void Awake()
         {
             if (Event == null) return;
             Event.RegisterListener(this, _replayEventBufferOnRegister);
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
             if (Event == null) return;
             Event.UnregisterListener(this);
@@ -90,22 +90,21 @@ namespace UnityAtoms
             {
                 var condition = _conditions[i];
 
-                if(condition == null) continue;
+                if (condition == null) continue;
 
                 if (condition is AtomCondition<T> conditionWithParam)
                 {
                     shouldRespond = conditionWithParam.Call(item);
-                }
-                else
+                } else
                 {
                     shouldRespond = condition.Call();
                 }
 
-                if(_operator == AtomConditionOperators.And && !shouldRespond) return;
-                if(_operator == AtomConditionOperators.Or  &&  shouldRespond) break;
+                if (_operator == AtomConditionOperators.And && !shouldRespond) return;
+                if (_operator == AtomConditionOperators.Or && shouldRespond) break;
             }
-            
-            if(! shouldRespond) return;
+
+            if (!shouldRespond) return;
 
             _unityEventResponse?.Invoke(item);
             for (int i = 0; _actionResponses != null && i < _actionResponses.Count; ++i)
@@ -117,8 +116,7 @@ namespace UnityAtoms
                 if (action is AtomAction<T> actionWithParam)
                 {
                     actionWithParam.Do(item);
-                }
-                else
+                } else
                 {
                     action.Do();
                 }
