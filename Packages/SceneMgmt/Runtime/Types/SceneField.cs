@@ -59,7 +59,7 @@ namespace UnityAtoms.SceneMgmt
         /// Scene asset as a property.
         /// </summary>
         /// <value>Set the scene asset.</value>
-        private Object SceneAsset { set { _sceneAsset = value; } } // NOTE: Needed in order to supress warning CS0649
+        public Object SceneAsset { set { _sceneAsset = value; } } // NOTE: Needed in order to supress warning CS0649
 
 
         // makes it work with the existing Unity methods (LoadLevel/LoadScene)
