@@ -71,7 +71,7 @@ namespace UnityAtoms
             Event.RegisterListener(this, _replayEventBufferOnRegister);
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
             if (Event == null) return;
             Event.UnregisterListener(this);
