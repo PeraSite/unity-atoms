@@ -169,7 +169,6 @@ namespace UnityAtoms
         {
             _oldValue = InitialValue;
             _value = InitialValue;
-
             _changedInstantiatedAtRuntime = false;
             _changedWithHistoryInstantiatedAtRuntime = false;
         }
