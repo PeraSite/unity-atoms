@@ -55,6 +55,12 @@ namespace UnityAtoms
             }
         }
 
+        public override void Add(object obj)
+        {
+            var item = (T) obj;
+            Add(item);
+        }
+
         /// <summary>
         /// Remove an item from the list.
         /// </summary>
@@ -215,6 +221,6 @@ namespace UnityAtoms
 
         #endregion // Observable
 
-        protected override IList IList { get => List; }
+        public override IList IList => List;
     }
 }
