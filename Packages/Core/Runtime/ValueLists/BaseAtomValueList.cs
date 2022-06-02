@@ -36,8 +36,6 @@ namespace UnityAtoms
 
         private void OnEnable()
         {
-            if (_startCleared)
-            {
 #if UNITY_EDITOR
                 if (UnityEditor.EditorSettings.enterPlayModeOptionsEnabled)
                 {
@@ -45,7 +43,6 @@ namespace UnityAtoms
                 }
 #endif
                 Clear();
-            }
         }
 
 #if UNITY_EDITOR
@@ -58,7 +55,8 @@ namespace UnityAtoms
         private static void ResetInstance()
         {
             foreach (var instance in _instances) {
-                instance.Clear();
+                if(instance._startCleared)
+                    instance.Clear();
             }
         }
 #endif
