@@ -9,5 +9,9 @@ namespace UnityAtoms.BaseAtoms
     [CreateAssetMenu(menuName = "Unity Atoms/Variables/Bool", fileName = "BoolVariable")]
     public sealed class BoolVariable : EquatableAtomVariable<bool, BoolPair, BoolEvent, BoolPairEvent, BoolBoolFunction>
     {
+        public static implicit operator bool(BoolVariable variable)
+        {
+            return variable.Value;
+        }
     }
 }
