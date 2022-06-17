@@ -48,10 +48,14 @@ namespace UnityAtoms.Editor
                         {
                             atomTarget.BaseValue = (double)(float)value;
                         }
-                        //Ulong is deserialized to System32 Int. 
+                        //Ulong is deserialized to System32 Int.
                         else if(typeof(T) == typeof(ulong))
                         {
                             atomTarget.BaseValue = (ulong)(int)value;
+                        }
+                        else if (typeof(T) == typeof(long))
+                        {
+                            atomTarget.BaseValue = (long)(int)value;
                         }
                         else
                         {
