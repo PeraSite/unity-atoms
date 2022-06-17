@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace UnityAtoms
@@ -13,7 +14,7 @@ namespace UnityAtoms
         /// Event for when the list is cleared.
         /// </summary>
         public AtomEventBase Cleared;
-        protected abstract IList IList { get; }
+        public abstract IList IList { get; }
 
         /// <summary>
         /// Whether the list should start cleared
@@ -32,12 +33,34 @@ namespace UnityAtoms
                 Cleared.Raise();
             }
         }
+
         private void OnEnable()
         {
-            if (_startCleared)
-            {
+#if UNITY_EDITOR
+                if (UnityEditor.EditorSettings.enterPlayModeOptionsEnabled)
+                {
+                    _instances.Add(this);
+                }
+#endif
                 Clear();
+        }
+
+#if UNITY_EDITOR
+        /// <summary>
+        /// Set of all AtomVariable instances in editor.
+        /// </summary>
+        private static HashSet<BaseAtomValueList> _instances = new();
+
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        private static void ResetInstance()
+        {
+            foreach (var instance in _instances) {
+                if(instance._startCleared)
+                    instance.Clear();
             }
         }
+#endif
+
+        public abstract void Add(object obj);
     }
 }
