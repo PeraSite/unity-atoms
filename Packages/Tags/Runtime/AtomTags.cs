@@ -84,7 +84,7 @@ namespace UnityAtoms.Tags
             _tags = _sortedTags.Values.ToList();
 
             // this null value is just for easier editing and could also be archived with an custom inspector
-            if (!EditorApplication.isPlaying) { _tags.Add(null); }
+            // if (!EditorApplication.isPlaying) { _tags.Add(null); }
         }
 #endif
 
