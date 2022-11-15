@@ -90,7 +90,7 @@ namespace UnityAtoms.Tags
 
         #region Lifecycles
 
-        private void OnEnable()
+        private void Awake()
         {
             if (!IsInitialized(gameObject))
             {
@@ -119,7 +119,7 @@ namespace UnityAtoms.Tags
             }
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
             if (TagInstances.ContainsKey(gameObject)) TagInstances.Remove(gameObject);
             for (var i = 0; i < Tags.Count; i++)
